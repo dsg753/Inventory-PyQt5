@@ -4,6 +4,9 @@ from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import sys
+import os
+
+
 
 # Import the database setup and models
 from database import engine, Base, МашиниИнвентар, МашиниПодНаем
@@ -15,7 +18,11 @@ session = Session()
 class InventoryApp(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("c:/Users/Georgi/Desktop/py/Inventory PyQt5/inventory.ui", self)
+        # Get the directory of the current script
+        base_dir = os.path.dirname(__file__)
+        # Construct the path to the .ui file
+        ui_path = os.path.join(base_dir, "inventory.ui")
+        uic.loadUi(ui_path, self)
 
         # Pagination variables
         self.inventory_page = 0
